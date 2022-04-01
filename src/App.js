@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import './App.css';
-import MainCalendar from './components/MainCalendar';
+import CalendarHeader from './components/CalendarHeader';
 import Month from './components/Month';
 import Sidebar from './components/Sidebar';
 import {getMonth} from './components/utils/utils'
@@ -13,7 +12,7 @@ function App() {
   return (
     <>
       <div>
-        <MainCalendar />
+        <CalendarHeader />
         <div>
           <Sidebar />
           <Month month={currentMonth}/>

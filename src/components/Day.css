@@ -1,0 +1,26 @@
+.Day__wrapper {
+    background-color: rgb(139, 198, 232);
+    border-radius: 5px;
+    margin: 1px
+
+}
+
+.Day__header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.Day__number {
+    line-height: 20px;
+    text-align: center;
+    padding: 4px;
+    border-radius: 9999px;
+    width: 28px;
+    margin: 4px 0;
+}
+
+.Day__number-higlighted {
+    color: white;
+    background-color: blue;
+}
