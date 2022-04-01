@@ -1,0 +1,28 @@
+.CalendarHeader__wrapper {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    padding: 5px;
+}
+
+.CalendarHeader__logo {
+    height: 50px;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+.CalendarHeader__title {
+    margin-right: 20px;
+}
+
+.CalendarHeader__btn-today, .CalendarHeader__btn-left, .CalendarHeader__btn-right {
+    background-color: white;
+    margin-right: 20px;
+    border: none;
+    outline:none;
+    background-color: lightgray;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
