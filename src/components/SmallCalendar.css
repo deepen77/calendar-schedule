@@ -1,0 +1,36 @@
+.SmallCalendar__btn-today, .SmallCalendar__btn-left
+ {
+    background-color: white;
+    margin-right: 20px;
+    border: none;
+    outline:none;
+    background-color: lightgray;
+    font-size: 16px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.SmallCalendar__calendar {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: repeat(5,1fr);
+    width: 100%;
+}
+
+.SmallCalendar__week {
+    text-align: center;
+    padding: 4px;
+}
+
+.SmallCalendar__btn-day {
+    border: none;
+    outline:none;
+    background-color: lightgray;
+    font-size: 10px;
+    padding: 5px 5px;
+    border-radius: 2px;
+    cursor: pointer;
+    margin: 1px;
+}

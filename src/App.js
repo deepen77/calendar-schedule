@@ -13,7 +13,7 @@ function App() {
     <>
       <div>
         <CalendarHeader />
-        <div>
+        <div className="App__sidebar__month-container">
           <Sidebar />
           <Month month={currentMonth}/>
         </div>
