@@ -9,6 +9,15 @@ const SmallCalendar = () => {
 
     const [currentMonthIdx, setCurrentMonthIdx] = useState(dayjs().month());
   const [currentMonth, setCurrentMonth] = useState(getMonth());
+
+
+  // const highlightCurrentDay = () => {
+  //   return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
+  //     ? "Day__number-higlighted"
+  //     : "";
+  //   //return "Day__number-higlighted";
+  // };
+
   useEffect(() => {
     setCurrentMonth(getMonth(currentMonthIdx));
   }, [currentMonthIdx]);
@@ -39,14 +48,16 @@ const SmallCalendar = () => {
           <React.Fragment key={i}>
             {row.map((day, idx) => (
               <button className="SmallCalendar__btn-day" key={idx}>
-                <span className="">{day.format("D")}</span>
+                <span className="">
+                  {day.format("D")}
+                </span>
               </button>
             ))}
           </React.Fragment>
         ))}
       </div>
     </div>
-  )
+  );
 }
 
 export default SmallCalendar
