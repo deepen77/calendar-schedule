@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 
 export function getMonth(month = dayjs().month()) {   //month will be from 0-11, default empty value is current month
   month = Math.floor(month);
-  console.log(month)
+  //console.log(month)
   const year = dayjs().year();
   //console.log('year:', year);
   const firstDayOfTheMonth = dayjs(new Date(year, month, 1)).day();

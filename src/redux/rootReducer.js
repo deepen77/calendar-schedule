@@ -1,6 +1,5 @@
 import monthIndexReducer from "./features/monthIndex.feature"
-
 const rootReducer = {
-  monthIndex: monthIndexReducer
+  monthIndex: monthIndexReducer,
 };
 export default rootReducer;

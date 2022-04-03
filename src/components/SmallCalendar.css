@@ -1,4 +1,5 @@
-.SmallCalendar__btn-today, .SmallCalendar__btn-left
+.SmallCalendar__btn-today, .SmallCalendar__btn-left,
+.SmallCalendar__btn-right
  {
     background-color: white;
     margin-right: 20px;

@@ -24,3 +24,8 @@
     color: white;
     background-color: blue;
 }
+
+.Day__number-selected {
+    color: white;
+    background-color: red;
+}

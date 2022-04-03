@@ -2,26 +2,66 @@ import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { getMonth } from "./utils/utils";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
-import './SmallCalendar.css'
-
+import {
+  synchronize
+} from "../redux/features/monthIndex.feature";
+import { useDispatch, useSelector } from "react-redux";
+import "./SmallCalendar.css";
 
 const SmallCalendar = () => {
+  let monthIndex = useSelector((state) => {
+    return state["monthIndex"];
+  });
 
-    const [currentMonthIdx, setCurrentMonthIdx] = useState(dayjs().month());
+
+  let dispatch = useDispatch();
+
+
+  const [currentMonthIdx, setCurrentMonthIdx] = useState(dayjs().month());
   const [currentMonth, setCurrentMonth] = useState(getMonth());
 
+  const [daySelected, setDaySelected] = useState("")
+  const [aaa, setAaa] = useState("")
 
-  // const highlightCurrentDay = () => {
-  //   return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
-  //     ? "Day__number-higlighted"
-  //     : "";
-  //   //return "Day__number-higlighted";
-  // };
 
   useEffect(() => {
     setCurrentMonth(getMonth(currentMonthIdx));
   }, [currentMonthIdx]);
 
+  useEffect(() => {
+    setCurrentMonthIdx(monthIndex.monthIndex);
+  }, [monthIndex.monthIndex]);
+
+  function handlePrevMonth() {
+    setCurrentMonthIdx(currentMonthIdx - 1);
+
+  }
+  function handleNextMonth() {
+    setCurrentMonthIdx(currentMonthIdx + 1);
+  }
+
+  const highlightCurrentDay = (day) => {
+    //console.log(day.format("DD-MM-YY"));
+    if (dayjs().format("DD-MM-YY") === day.format("DD-MM-YY")) {
+      return "Day__number-higlighted";
+    } else {
+      return "";
+    }
+  };
+
+
+const daySelect = (day) => {
+   console.log(day.format("DD-MM-YY"));
+setDaySelected(day.format("DD-MM-YY"));
+}
+
+
+
+
+
+  const handlMonthMainCalendar = () => {
+  dispatch(synchronize(currentMonthIdx));
+  }
 
   return (
     <div className="">
@@ -30,10 +70,13 @@ const SmallCalendar = () => {
           {dayjs(new Date(dayjs().year(), currentMonthIdx)).format("MMMM YYYY")}
         </p>
         <div>
-          <button className="SmallCalendar__btn-left">
+          <button onClick={handlePrevMonth} className="SmallCalendar__btn-left">
             <HiChevronLeft />
           </button>
-          <button className="SmallCalendar__btn-left">
+          <button
+            onClick={handleNextMonth}
+            className="SmallCalendar__btn-right"
+          >
             <HiChevronRight />
           </button>
         </div>
@@ -47,8 +90,22 @@ const SmallCalendar = () => {
         {currentMonth.map((row, i) => (
           <React.Fragment key={i}>
             {row.map((day, idx) => (
-              <button className="SmallCalendar__btn-day" key={idx}>
-                <span className="">
+              <button
+                // onClick={handlMonthMainCalendar}
+                onClick={() => {
+                  handlMonthMainCalendar();
+                  daySelect(day);
+                }}
+                className="SmallCalendar__btn-day"
+                key={idx}
+              >
+                <span
+                  className={`Day__number ${highlightCurrentDay(day)} ${
+                    daySelected === day.format("DD-MM-YY")
+                      ? "Day__number-selected"
+                      : ""
+                  }`}
+                >
                   {day.format("D")}
                 </span>
               </button>
@@ -58,7 +115,6 @@ const SmallCalendar = () => {
       </div>
     </div>
   );
-}
+};
 
-export default SmallCalendar
-
+export default SmallCalendar;

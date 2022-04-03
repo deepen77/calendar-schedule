@@ -11,12 +11,18 @@ let monthIndexSlice = createSlice({
   reducers: {
     increment: function (state, action) {
       state.monthIndex = state.monthIndex + 1;
-      console.log(state.monthIndex)
+      //console.log(state.monthIndex);
     },
     decrement: function (state, action) {
       state.monthIndex = state.monthIndex - 1;
     },
+    reset: function (state, action) {
+      state.monthIndex = dayjs().month();
+    },
+    synchronize: function (state, action) {
+      state.monthIndex = action.payload;
+    },
   },
 });
-export const { increment, decrement} = monthIndexSlice.actions;
+export const { increment, decrement, reset,synchronize, changeM} = monthIndexSlice.actions;
 export default monthIndexSlice.reducer;
