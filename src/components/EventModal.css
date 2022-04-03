@@ -1,0 +1,139 @@
+.EventModal__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    position: fixed;
+    background-color: rgba(237, 237, 237, 0.543);
+}
+
+.EventModal__form {
+    width: 25%;
+    border-radius: 8px;
+    background-color: rgba(255,255,255);
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+}
+
+.EventModal__header {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: rgba(243,244,246);
+    justify-content: flex-end;
+    align-items: center;
+    display:flex;
+}
+
+.EventModal__header_btn-close {
+    color: rgba(75,85,99);
+    background-color: transparent;
+    cursor: pointer;
+    border: 0 solid;
+    font-size: 24px;
+}
+
+.EventModal__content {
+    padding: 0.75rem;
+}
+
+.EventModal__content-grid {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    row-gap: 1.75rem;
+    align-items: flex-end;
+}
+
+.EventModal__content-addTitle,
+.EventModal__content-addDescription  {
+    color: rgba(75,85,99);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 28px;
+    padding-bottom: 8px;
+    padding-top: 12px;
+    border-color: rgba(229,231,235);
+    border-width: 0;
+    border-bottom-width: 2px;
+    width: 100%;
+}
+
+.EventModal__content-addTitle:focus,
+.EventModal__content-addDescription:focus {
+    outline: none;
+    border-color: blue;
+}
+
+.EventModal__content__icon-schedule,
+.EventModal__content__icon-bookmark {
+    color: rgba(156,163,175);
+    font-size: 24px;
+}
+
+.EventModal__content-addDescription {
+    font-size: 16px;
+}
+
+.EventModal__content__check-container {
+    display: flex;
+    column-gap: 8px;
+}
+
+.EventModal__content__check {
+    display: flex;
+    border-radius: 9999px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+.indigo {
+    background-color: indigo;
+}
+.grey {
+    background-color: grey;
+}
+.green {
+    background-color: green;
+}
+.blue {
+    background-color: blue;
+}
+.red {
+    background-color: red;
+}
+.purple {
+    background-color: purple;
+}
+
+.EventModal__content__check-icon {
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.EventModal__footer_content {
+    display: flex;
+    justify-content: flex-end;
+    border: 0 solid;
+    border-top-width: 1px;
+    border-color: rgba(229,231,235);
+    padding: 12px;
+    margin-top: 20px;
+}
+
+.EventModal__footer_btn-save {
+    color: rgba(255,255,255);
+    padding: 8px 24px;
+    background-color: rgba(59,130,246);
+    border-radius: 4px;
+    cursor: pointer;
+    border: 0 solid;
+    border-color: rgba(229,231,235);
+    font-size: 18px;
+}

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { getMonth } from "./utils/utils";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 import {
-  synchronize
+  synchronize, selectDay, selectDate
 } from "../redux/features/monthIndex.feature";
 import { useDispatch, useSelector } from "react-redux";
 import "./SmallCalendar.css";
@@ -20,8 +20,7 @@ const SmallCalendar = () => {
   const [currentMonthIdx, setCurrentMonthIdx] = useState(dayjs().month());
   const [currentMonth, setCurrentMonth] = useState(getMonth());
 
-  const [daySelected, setDaySelected] = useState("")
-  const [aaa, setAaa] = useState("")
+  // const [daySelected, setDaySelected] = useState("")
 
 
   useEffect(() => {
@@ -52,7 +51,8 @@ const SmallCalendar = () => {
 
 const daySelect = (day) => {
    console.log(day.format("DD-MM-YY"));
-setDaySelected(day.format("DD-MM-YY"));
+   dispatch(selectDay(day.format("DD-MM-YY")));
+   dispatch(selectDate(day.format("dddd, MMMM DD")));
 }
 
 
@@ -100,8 +100,8 @@ setDaySelected(day.format("DD-MM-YY"));
                 key={idx}
               >
                 <span
-                  className={`Day__number ${highlightCurrentDay(day)} ${
-                    daySelected === day.format("DD-MM-YY")
+                  className={`Day__number ${highlightCurrentDay(day)}  ${
+                    monthIndex.daySelected === day.format("DD-MM-YY")
                       ? "Day__number-selected"
                       : ""
                   }`}
