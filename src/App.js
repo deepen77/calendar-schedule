@@ -5,6 +5,8 @@ import Sidebar from "./components/Sidebar";
 import { getMonth } from "./components/utils/utils";
 import { useDispatch, useSelector } from "react-redux";
 import EventModal from "./components/EventModal";
+import {getCurrentMonth} from "./redux/features/monthIndex.feature"
+import dayjs from "dayjs";
 
 function App() {
   let monthIndex = useSelector((state) => {
@@ -14,13 +16,20 @@ function App() {
   console.log("monthIndex:", monthIndex.monthIndex);
   console.log("eventModal:", monthIndex.showEventModal);
   console.log("daySelected:", monthIndex.daySelected);
-  console.log("eventDateSelected", monthIndex.eventDateSelected);
+  console.log("savedEvents", monthIndex.savedEvents);
+
 
   let dispatch = useDispatch()
 
   const [currentMonth, setCurrentMonth] = useState(
-    getMonth(monthIndex.monthIndex)
+    getMonth()
   );
+
+  console.log(currentMonth)
+
+useEffect(() => {
+  dispatch(getCurrentMonth(dayjs().month()))
+},[dispatch])
 
 
 

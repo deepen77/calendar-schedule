@@ -5,12 +5,17 @@ import './Sidebar.css'
 import SmallCalendar from './SmallCalendar'
 
 const Sidebar = () => {
+
+
   return (
-    <aside className="Sidebar__container">
-      <CreateEventButton />
-      <SmallCalendar />
-      <Labels />
-    </aside>
+    <>
+      <aside className="Sidebar__container">
+        <CreateEventButton />
+        <SmallCalendar />
+        <Labels />
+      </aside>
+
+    </>
   );
 }
 

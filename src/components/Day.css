@@ -2,7 +2,7 @@
     background-color: rgb(139, 198, 232);
     border-radius: 5px;
     margin: 1px;
-    cursor: pointer;
+
 
 }
 
@@ -10,6 +10,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+     cursor: pointer;
 }
 
 .Day__number {

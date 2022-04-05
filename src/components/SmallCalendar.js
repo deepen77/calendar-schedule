@@ -2,9 +2,7 @@ import dayjs from "dayjs";
 import React, { useEffect, useState } from "react";
 import { getMonth } from "./utils/utils";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
-import {
-  synchronize, selectDay, selectDate
-} from "../redux/features/monthIndex.feature";
+import { synchronize, selectDay } from "../redux/features/monthIndex.feature";
 import { useDispatch, useSelector } from "react-redux";
 import "./SmallCalendar.css";
 
@@ -13,15 +11,12 @@ const SmallCalendar = () => {
     return state["monthIndex"];
   });
 
-
   let dispatch = useDispatch();
-
 
   const [currentMonthIdx, setCurrentMonthIdx] = useState(dayjs().month());
   const [currentMonth, setCurrentMonth] = useState(getMonth());
 
   // const [daySelected, setDaySelected] = useState("")
-
 
   useEffect(() => {
     setCurrentMonth(getMonth(currentMonthIdx));
@@ -33,7 +28,6 @@ const SmallCalendar = () => {
 
   function handlePrevMonth() {
     setCurrentMonthIdx(currentMonthIdx - 1);
-
   }
   function handleNextMonth() {
     setCurrentMonthIdx(currentMonthIdx + 1);
@@ -48,20 +42,14 @@ const SmallCalendar = () => {
     }
   };
 
-
-const daySelect = (day) => {
-   console.log(day.format("DD-MM-YY"));
-   dispatch(selectDay(day.format("DD-MM-YY")));
-   dispatch(selectDate(day.format("dddd, MMMM DD")));
-}
-
-
-
-
+  const daySelect = (day) => {
+    console.log(day.valueOf());
+    dispatch(selectDay(day.valueOf()));
+  };
 
   const handlMonthMainCalendar = () => {
-  dispatch(synchronize(currentMonthIdx));
-  }
+    dispatch(synchronize(currentMonthIdx));
+  };
 
   return (
     <div className="">
@@ -101,7 +89,8 @@ const daySelect = (day) => {
               >
                 <span
                   className={`Day__number ${highlightCurrentDay(day)}  ${
-                    monthIndex.daySelected === day.format("DD-MM-YY")
+                    dayjs(monthIndex.daySelected).format("DD-MM-YY") ===
+                    day.format("DD-MM-YY")
                       ? "Day__number-selected"
                       : ""
                   }`}

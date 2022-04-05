@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal } from "../redux/features/monthIndex.feature";
+import { closeModal, addEvent } from "../redux/features/monthIndex.feature";
 import { MdSchedule, MdBookmarkBorder, MdCheck, MdClose } from "react-icons/md";
 import "./EventModal.css";
+import { uid } from "./utils/uid";
+import dayjs from "dayjs";
+
 
 const labels = ["indigo", "grey", "green", "blue", "red", "purple"];
 
@@ -14,10 +17,26 @@ const EventModal = () => {
 
 
   const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+  const [selectedLabel, setSelectedLabel] = useState(labels[0])
+
+
 
   let dispatch = useDispatch();
 
+function handleSubmit(e) {
+  e.preventDefault()
+  const calendarEvent = {
+    title,
+    description,
+    selectedLabel,
+    day: monthIndex.daySelected,
 
+    id: uid(),
+  };
+  dispatch(addEvent(calendarEvent))
+  dispatch(closeModal())
+}
 
 
 
@@ -49,7 +68,11 @@ const EventModal = () => {
             <span className="EventModal__content__icon-schedule">
               <MdSchedule />
             </span>
-            <p>{monthIndex.eventDateSelected}</p>
+            <p>
+              {dayjs(monthIndex.daySelected).format(
+                "dddd, MMMM D, YYYY"
+              )}
+            </p>
             <span className="EventModal__content__icon-schedule">
               <MdSchedule />
             </span>
@@ -57,26 +80,37 @@ const EventModal = () => {
               type="text"
               name="description"
               placeholder="Add a description"
-              value="description in curly bracket"
+              value={description}
               required
               className="EventModal__content-addDescription"
+              onChange={(e) => setDescription(e.target.value)}
             />
             <span className="EventModal__content__icon-bookmark">
               <MdBookmarkBorder />
             </span>
             <div className="EventModal__content__check-container">
               {labels.map((label, i) => (
-                <span key={i} className={`EventModal__content__check ${label}`}>
-                  <span className="EventModal__content__check-icon">
-                    <MdCheck />
-                  </span>
+                <span
+                  key={i}
+                  onClick={() => setSelectedLabel(label)}
+                  className={`EventModal__content__check ${label}`}
+                >
+                  {selectedLabel === label && (
+                    <span className="EventModal__content__check-icon">
+                      <MdCheck />
+                    </span>
+                  )}
                 </span>
               ))}
             </div>
           </div>
         </div>
         <footer className="EventModal__footer_content">
-          <button type="submit" className="EventModal__footer_btn-save">
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className="EventModal__footer_btn-save"
+          >
             Save
           </button>
         </footer>
