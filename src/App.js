@@ -17,6 +17,7 @@ function App() {
   console.log("eventModal:", monthIndex.showEventModal);
   console.log("daySelected:", monthIndex.daySelected);
   console.log("savedEvents", monthIndex.savedEvents);
+  console.log("selectedEvent", monthIndex.selectedEvent);
 
 
   let dispatch = useDispatch()

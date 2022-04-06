@@ -6,6 +6,7 @@ const initialState = {
   showEventModal: false,
   daySelected: null,
   savedEvents: [],
+  selectedEvent: null,
 };
 
 let monthIndexSlice = createSlice({
@@ -40,12 +41,14 @@ let monthIndexSlice = createSlice({
       state.savedEvents.push(action.payload);
     },
     updateEvent: function (state, action) {
-      state.savedEvents.map((evt) =>
-        evt.id === action.payload.id ? action.payload : evt
-      );
+      let index = state.savedEvents.findIndex((evt)=> evt.id === action.payload.id);
+      state.savedEvents.splice(index, 1, action.payload)
     },
     deleteEvent: function (state, action) {
       state.savedEvents.filter((evt) => evt.id !== action.payload.id);
+    },
+    selectEvent: function (state, action) {
+      state.selectedEvent = action.payload;
     },
   },
 });
@@ -60,5 +63,7 @@ export const {
   closeModal,
   selectDay,
   addEvent,
+  updateEvent,
+  selectEvent,
 } = monthIndexSlice.actions;
 export default monthIndexSlice.reducer;

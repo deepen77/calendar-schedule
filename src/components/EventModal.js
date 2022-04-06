@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { closeModal, addEvent } from "../redux/features/monthIndex.feature";
+import {
+  closeModal,
+  addEvent,
+  updateEvent,
+  selectEvent
+} from "../redux/features/monthIndex.feature";
 import { MdSchedule, MdBookmarkBorder, MdCheck, MdClose } from "react-icons/md";
 import "./EventModal.css";
 import { uid } from "./utils/uid";
@@ -16,10 +21,18 @@ const EventModal = () => {
 
 
 
-  const [title, setTitle] = useState('')
-  const [description, setDescription] = useState('')
-  const [selectedLabel, setSelectedLabel] = useState(labels[0])
+  const [title, setTitle] = useState(monthIndex.selectedEvent ? monthIndex.selectedEvent.title : "" );
+  const [description, setDescription] = useState(
+    monthIndex.selectedEvent ? monthIndex.selectedEvent.description : ""
+  );
+  const [selectedLabel, setSelectedLabel] = useState(
+    monthIndex.selectedEvent
+      ? monthIndex.selectedEvent.selectedLabel
+      : labels[0]
+  );
 
+
+  console.log(selectedLabel);
 
 
   let dispatch = useDispatch();
@@ -30,12 +43,19 @@ function handleSubmit(e) {
     title,
     description,
     selectedLabel,
-    day: monthIndex.daySelected,
-
-    id: uid(),
+    //day: monthIndex.daySelected,
+    day: monthIndex.selectedEvent
+      ? monthIndex.selectedEvent.day
+      : monthIndex.daySelected,
+    id: monthIndex.selectedEvent ? monthIndex.selectedEvent.id : uid(),
   };
+  if (monthIndex.selectedEvent) {
+    dispatch(updateEvent(calendarEvent));
+  } else {
   dispatch(addEvent(calendarEvent))
+  }
   dispatch(closeModal())
+  dispatch(selectEvent(null));
 }
 
 
@@ -47,7 +67,10 @@ function handleSubmit(e) {
           <div>
             <button
               className="EventModal__header_btn-close"
-              onClick={() => dispatch(closeModal())}
+              onClick={() => {
+                dispatch(closeModal());
+                dispatch(selectEvent(null));
+              }}
             >
               <MdClose />
             </button>
@@ -69,9 +92,10 @@ function handleSubmit(e) {
               <MdSchedule />
             </span>
             <p>
-              {dayjs(monthIndex.daySelected).format(
-                "dddd, MMMM D, YYYY"
-              )}
+              {monthIndex.selectedEvent
+                ? dayjs(monthIndex.selectedEvent.day).format("dddd, MMMM D, YYYY")
+                : dayjs(monthIndex.daySelected).format("dddd, MMMM D, YYYY")}
+              {/* {dayjs(monthIndex.daySelected).format("dddd, MMMM D, YYYY")} */}
             </p>
             <span className="EventModal__content__icon-schedule">
               <MdSchedule />
@@ -111,7 +135,7 @@ function handleSubmit(e) {
             onClick={handleSubmit}
             className="EventModal__footer_btn-save"
           >
-            Save
+            {monthIndex.selectedEvent ? "Update": "Save" }
           </button>
         </footer>
       </form>

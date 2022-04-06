@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import dayjs from 'dayjs';
-import { selectDay, openModal} from '../redux/features/monthIndex.feature';
+import { selectDay, openModal, selectEvent} from '../redux/features/monthIndex.feature';
 
 import './Day.css'
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,6 +26,11 @@ const [dayEvents, setDayEvents] = useState([])
         return day.format("DD-MM-YY") === dayjs().format("DD-MM-YY") ? "Day__number-higlighted" : ""
     }
 
+    // const setSelectedEvent = (evt) => {
+    //   console.log(evt)
+    //   dispatch(openModal(evt))
+    // }
+
     useEffect(() => {
       const events = monthIndex.savedEvents.filter(
 
@@ -40,14 +45,14 @@ const [dayEvents, setDayEvents] = useState([])
 
 
   return (
-    <div
-      onClick={() => {
-        daySelect(day);
-        dispatch(openModal());
-      }}
-      className="Day__wrapper"
-    >
-      <header className="Day__header">
+    <div className="Day__wrapper">
+      <header
+        onClick={() => {
+          daySelect(day);
+          dispatch(openModal());
+        }}
+        className="Day__header"
+      >
         {rowIdx === 0 && <p>{day.format("ddd")}</p>}
 
         <p className={`Day__number ${highlightCurrentDay()}`}>
@@ -55,7 +60,14 @@ const [dayEvents, setDayEvents] = useState([])
         </p>
       </header>
       {dayEvents.map((evt, id) => (
-        <div className={evt.selectedLabel} key={evt.id}>
+        <div
+          onClick={() => {
+            dispatch(selectEvent(evt))
+            dispatch(openModal());
+          }}
+          className={evt.selectedLabel}
+          key={evt.id}
+        >
           {evt.title}
         </div>
       ))}
