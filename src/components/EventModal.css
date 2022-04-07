@@ -28,12 +28,14 @@
     display:flex;
 }
 
-.EventModal__header_btn-close {
+.EventModal__header_btn-close,
+.EventModal__header_btn-delete {
     color: rgba(75,85,99);
     background-color: transparent;
     cursor: pointer;
     border: 0 solid;
     font-size: 24px;
+    margin-left: 10px;
 }
 
 .EventModal__content {

@@ -41,11 +41,16 @@ let monthIndexSlice = createSlice({
       state.savedEvents.push(action.payload);
     },
     updateEvent: function (state, action) {
-      let index = state.savedEvents.findIndex((evt)=> evt.id === action.payload.id);
-      state.savedEvents.splice(index, 1, action.payload)
+      let index = state.savedEvents.findIndex(
+        (evt) => evt.id === action.payload.id
+      );
+      state.savedEvents.splice(index, 1, action.payload);
     },
     deleteEvent: function (state, action) {
-      state.savedEvents.filter((evt) => evt.id !== action.payload.id);
+      let index = state.savedEvents.findIndex(
+        (evt) => evt.id === action.payload.id
+      );
+      state.savedEvents.splice(index, 1);
     },
     selectEvent: function (state, action) {
       state.selectedEvent = action.payload;
@@ -65,5 +70,6 @@ export const {
   addEvent,
   updateEvent,
   selectEvent,
+  deleteEvent,
 } = monthIndexSlice.actions;
 export default monthIndexSlice.reducer;
