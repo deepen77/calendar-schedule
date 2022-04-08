@@ -20,7 +20,7 @@ const Month = ({ month }) => {
           ))}
         </React.Fragment>
       ))}
-      {monthIndex.savedEvents.map((evt, id) => (
+      {monthIndex.filteredEvents.map((evt, id) => (
         <div className={evt.selectedLabel} key={evt.id}>
           {evt.title}
         </div>

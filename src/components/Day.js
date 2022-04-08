@@ -32,16 +32,16 @@ const [dayEvents, setDayEvents] = useState([])
     // }
 
     useEffect(() => {
-      const events = monthIndex.savedEvents.filter(
+      const events = monthIndex.filteredEvents.filter(
 
         (evt) => {
-          console.log("data:", (dayjs(evt.day).format("DD-MM-YY")));
+          // console.log("data:", (dayjs(evt.day).format("DD-MM-YY")));
          return dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY")
         });
       setDayEvents(events);
 
 
-    }, [monthIndex.savedEvents, day]);
+    }, [monthIndex.filteredEvents, day]);
 
 
   return (

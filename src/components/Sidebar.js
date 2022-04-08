@@ -12,9 +12,8 @@ const Sidebar = () => {
       <aside className="Sidebar__container">
         <CreateEventButton />
         <SmallCalendar />
-        <Labels />
+        <Labels/>
       </aside>
-
     </>
   );
 }

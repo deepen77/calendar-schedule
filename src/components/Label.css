@@ -1,0 +1,30 @@
+.Labels__labelsContainer {
+    display: flex;
+    align-items: center;
+}
+
+.indigo {
+    /* background-color: indigo; */
+    border-color: transparent;
+    accent-color: indigo;
+}
+.grey {
+    border-color: transparent;
+    accent-color: grey;
+}
+.green {
+    border-color: transparent;
+    accent-color: green;
+}
+.blue {
+    border-color: transparent;
+    accent-color: blue;
+}
+.red {
+    border-color: transparent;
+    accent-color: red;
+}
+.purple {
+    border-color: transparent;
+    accent-color: purple;
+}

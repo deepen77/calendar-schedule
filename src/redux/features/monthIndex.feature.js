@@ -7,6 +7,8 @@ const initialState = {
   daySelected: null,
   savedEvents: [],
   selectedEvent: null,
+  labels: [],
+  filteredEvents: []
 };
 
 let monthIndexSlice = createSlice({
@@ -55,6 +57,34 @@ let monthIndexSlice = createSlice({
     selectEvent: function (state, action) {
       state.selectedEvent = action.payload;
     },
+    getLabels: function (state, action) {
+      state.labels = [
+        ...new Set(state.savedEvents.map((evt) => evt.selectedLabel)),
+      ].map((label) => {
+        return {
+          label,
+           checked: true,
+        };
+      });
+    },
+    labelsStatus: function (state, action) {
+      let index = state.labels.findIndex(
+        (evt) => evt.label === action.payload.label
+      );
+      state.labels.splice(index, 1, action.payload);
+    },
+    verifyStatus: function (state, action) {
+      state.labels = state.labels.filter((lbl) => {
+        return state.filteredEvents.find((evt) => lbl.label === evt.selectedLabel && lbl.checked )
+      })
+    },
+    filterEvents: function (state, action) {
+      state.filteredEvents = state.savedEvents.filter((evt) =>
+        state.labels.find(
+          (lbl) => evt.selectedLabel === lbl.label && lbl.checked
+        )
+      );
+    },
   },
 });
 export const {
@@ -71,5 +101,9 @@ export const {
   updateEvent,
   selectEvent,
   deleteEvent,
+  getLabels,
+  labelsStatus,
+  filterEvents,
+  verifyStatus
 } = monthIndexSlice.actions;
 export default monthIndexSlice.reducer;

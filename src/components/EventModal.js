@@ -5,7 +5,10 @@ import {
   addEvent,
   updateEvent,
   selectEvent,
-  deleteEvent
+  deleteEvent,
+  getLabels,
+  filterEvents,
+  verifyStatus,
 } from "../redux/features/monthIndex.feature";
 import {
   MdSchedule,
@@ -50,6 +53,7 @@ function handleSubmit(e) {
     title,
     description,
     selectedLabel,
+    checked: monthIndex.selectedEvent ? monthIndex.selectedEvent.checked : true,
     //day: monthIndex.daySelected,
     day: monthIndex.selectedEvent
       ? monthIndex.selectedEvent.day
@@ -63,6 +67,10 @@ function handleSubmit(e) {
   }
   dispatch(closeModal())
   dispatch(selectEvent(null));
+  dispatch(getLabels())
+
+  dispatch(filterEvents());
+;
 }
 
 function deleteEvt() {
@@ -79,6 +87,8 @@ function deleteEvt() {
   dispatch(deleteEvent(calendarEvent));
   dispatch(closeModal());
   dispatch(selectEvent(null));
+  dispatch(getLabels());
+  dispatch(filterEvents());
 }
 
 
